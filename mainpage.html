@@ -9,26 +9,6 @@
 <body bgcolor="#15171e">
   <a href="mainpage.html"><img src="images/logo.png" width="210" height="60"></a>
 
-  <!-- <table class="headlinks" align="center" bgcolor="#23252b" width="99%" height="60" cellpadding="20">
-    <tr align="left">
-      <th align="center" width="10%"> 
-        <a style="text-decoration: none;" href="warcraft.html"><font face="Arial" color="#c0c1c4">Warcraft</font></a>
-      </th>
-      <th align="center" width="10%">
-        <a style="text-decoration: none;" href="callofduty.html"><font face="Arial" color="#c0c1c4">Call of Duty</font></a>
-      </th>
-      <th align="center" width="10%">
-        <a style="text-decoration: none;" href="diablo.html"><font face="Arial" color="#c0c1c4">Diablo</font></a>
-      </th>
-      <th>
-        <a style="text-decoration: none;" href="overwatch.html"><font face="Arial" color="#c0c1c4">Overwatch 2</font></a>
-      </th>
-      <th>
-        <a style="text-decoration: none;" href="callofduty.html"><font face="Arial" color="#6cdb0b">Распродажа в честь 20-летия Call of Duty</font></a>
-      </th>
-    </tr>
-  </table> -->
-
   <div class="headlinks">
     <div class="box">
       <a class="headlink" href="warcraft.html">Warcraft</a>
@@ -88,6 +68,17 @@
     </div>
   </div>
   
+  <script type="text/javascript">
+    var counter = 1;
+    setInterval(function(){
+      document.getElementById("radio" + counter).checked = true;
+      counter++;
+      if (counter > 6)
+      {
+        counter = 1;
+      }
+    }, 5000);
+  </script>
   <p><font face="Arial" color="#fffff2" size="5"><b>Рекомендуем</b></font></p>
 
   <table cellpadding="10px" cellspacing="25px">
@@ -162,14 +153,41 @@
   </div>
 
   <footer>
-    <form method="get">
+    <form id="form" method="get">
       <h3><font face="Arial" size="5" color="#fffff2"><b>Регистрация</b></font></h3>
       <table>
         <tr>
           <td align="right">
             <font face="Arial" size="4" color="#b3b6bf">Введите свою почту </font>
-            <input type="email" name="email" size="30">
+            <input type="text" name="email" id="email" size="30" onkeydown="validation()">
+            <span id="text"></span>
           </td>
+          <script type="text/javascript">
+            function validation()
+            {
+              var form = document.getElementById("form");
+              var email = document.getElementById("email").value;
+              var text = document.getElementById("text");
+
+              var pattern = /^[^ ]+@[^ ]+\.[a-z]/;
+              // var pattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+
+              if(email.match(pattern))
+              {
+                form.classList.add("valid");
+                form.classList.remove("invalid"); 
+                text.innerHTML = "Введен правильный адрес почты."; 
+                text.style.color = "#00ff00";
+              }
+              else
+              {
+                form.classList.remove("valid");
+                form.classList.add("invalid");
+                text.innerHTML = "Вы ввели неправильный адрес почты, попробуйте снова.";
+                text.style.color = "#ff0000"; 
+              }
+            }
+          </script>
         </tr>
         <tr>
           <td>
